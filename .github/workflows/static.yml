@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuenta Regresiva - Gobierno de Gustavo Petro</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .countdown-container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .time-block {
+        background-color: #eb0024;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        min-width: 60px;
+      }
+      .time-block span {
+        display: block;
+        font-size: 36px;
+        font-weight: bold;
+      }
+      .time-block label {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="countdown-container">
+      <h1>Tiempo restante del gobierno de Gustavo Petro</h1>
+      <div class="countdown">
+        <div class="time-block">
+          <span id="days">0</span>
+          <label>Días</label>
+        </div>
+        <div class="time-block">
+          <span id="hours">0</span>
+          <label>Horas</label>
+        </div>
+        <div class="time-block">
+          <span id="minutes">0</span>
+          <label>Minutos</label>
+        </div>
+        <div class="time-block">
+          <span id="seconds">0</span>
+          <label>Segundos</label>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Fecha de finalización del gobierno: 7 de agosto de 2026, 00:00:00
+      const endDate = new Date("August 7, 2026 00:00:00").getTime();
+
+      // Actualizar la cuenta regresiva cada segundo
+      const countdown = setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = endDate - now;
+
+        // Calcular días, horas, minutos y segundos restantes
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        // Mostrar los valores en los elementos HTML
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+
+        // Si la cuenta regresiva termina
+        if (timeLeft < 0) {
+          clearInterval(countdown);
+          document.querySelector(".countdown-container h1").innerText =
+            "El gobierno de Gustavo Petro ha terminado";
+          document.getElementById("days").innerText = "0";
+          document.getElementById("hours").innerText = "0";
+          document.getElementById("minutes").innerText = "0";
+          document.getElementById("seconds").innerText = "0";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
